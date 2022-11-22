@@ -16,9 +16,41 @@
     }
 
     function timer() {
-        console.log(hour.value);
-        console.log(minute.value);
-        console.log(second.value);
+        if(second.value > 60) {
+            minute.value ++;
+            second.value = parseInt(second.value) - 60;
+        }
+
+        if(minute.value > 60) {
+            hour.value ++;
+            minute.value = parseInt(minute.value) - 60;
+        }
+
+        minute.value = (minute.value > 60) ? 60 : minute.value;
+
+
+        if((hour.value == 0) && (minute.value == 0) && (second.value == 0)) {
+            hour.value = "";
+            minute.value = "";
+            second.value = "";
+            stopTimer();
+        }
+
+        if(second.value != 0) {
+            second.value = (second.value  > 10) ? (second.value - 1) : `0${second.value - 1}`;
+        }
+
+        if((minute.value != 0) && (second.value == 0)) {
+            second.value = 60;
+            minute.value = (minute.value  > 10) ? (minute.value - 1) : `0${minute.value - 1}`;
+        }
+
+        if((hour.value != 0) && (minute.value == 0) && (second.value == 0)) {
+            minute.value = 60;
+            hour.value = (hour.value  > 10) ? (hour.value - 1) : `0${hour.value - 1}`;
+        }
+
+        return
     }
 
     function startTimer() {
